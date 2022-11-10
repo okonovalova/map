@@ -88,7 +88,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mMap.setOnMapClickListener { latLng ->
             if (childFragmentManager.findFragmentByTag(NewPointDialogFragment.TAG) == null) {
                 NewPointDialogFragment.newInstance {
-                    viewModel.saveMarker(it, latLng)
+                    viewModel.saveMarker(it, latLng.latitude,latLng.longitude)
                     addMarker(it, latLng)
                 }
                     .show(childFragmentManager, NewPointDialogFragment.TAG)
@@ -105,13 +105,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 UpdatePointDialogFragment.newInstance(
                     onDeletePointListener = {
                         marker.remove()
-                        viewModel.removeMarker(marker.position)
+                        viewModel.removeMarker(marker.position.latitude,marker.position.longitude)
                     },
                     onRenamePointListener = {
                         marker.title = it
                         marker.hideInfoWindow()
                         marker.showInfoWindow()
-                        viewModel.updateMarker(marker.title.orEmpty(), marker.position)
+                        viewModel.updateMarker(marker.title.orEmpty(), marker.position.latitude, marker.position.longitude)
                     },
                     title = marker.title.orEmpty()
                 )

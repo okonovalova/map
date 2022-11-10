@@ -45,28 +45,28 @@ class MapsViewModel @Inject constructor(
         _navigateMarker.postValue(marker)
     }
 
-    fun saveMarker(title: String, latLng: LatLng) {
+    fun saveMarker(title: String, lat: Double, long:Double) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.saveMarker(Marker(title, latLng.latitude, latLng.longitude))
+                repository.saveMarker(Marker(title, lat, long))
                 getMarkers()
             }
         }
     }
 
-    fun updateMarker(title: String, latLng: LatLng) {
+    fun updateMarker(title: String, lat: Double, long:Double) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.updateMarker(Marker(title, latLng.latitude, latLng.longitude))
+                repository.updateMarker(Marker(title, lat, long))
                 getMarkers()
             }
         }
     }
 
-    fun removeMarker(latLng: LatLng) {
+    fun removeMarker(lat: Double, long:Double) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.removeMarker(latLng.latitude, latLng.longitude)
+                repository.removeMarker(lat, long)
                 getMarkers()
             }
         }

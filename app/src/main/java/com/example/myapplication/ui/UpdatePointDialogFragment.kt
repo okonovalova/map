@@ -48,11 +48,10 @@ class UpdatePointDialogFragment : BottomSheetDialogFragment() {
             dismissAllowingStateLoss()
         }
         _binding?.editTextPointName?.setText(arguments?.getString(ARG_TITLE).orEmpty())
-        _binding?.btnRemove?.setOnClickListener {
-            onDeletePointListener.invoke()
+        _binding?.btnCancel1?.setOnClickListener {
             dismissAllowingStateLoss()
         }
-        _binding?.btnCreate?.setOnClickListener {
+        _binding?.btnUpdate?.setOnClickListener {
             val name = _binding?.editTextPointName?.text?.toString().orEmpty()
             if (name.isEmpty()) {
                 val random = Random.nextInt(10000)
